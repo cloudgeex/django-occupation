@@ -74,7 +74,7 @@ def SelectTenant(get_response: Callable) -> Callable:
                 if request.session.get('active_tenant'):
                     return HttpResponse(TENANT_CHANGED % request.session)
                 return HttpResponse(TENANT_CLEARED)
-            elif request.GET.get('__tenant') is not None:
+            if request.GET.get('__tenant') is not None:
                 select_tenant(request, request.GET['__tenant'])
                 data = request.GET.copy()
                 data.pop('__tenant')
